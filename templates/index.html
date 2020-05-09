@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    {% block head %}
+    <title>Index</title>
+    <h1 style="font-size: x-large;text-align: center;">Expense Tracker</h1>
+    {% endblock %}
+
+</head>
+<body>
+    <!-- Hello World2 -->
+    {% block body %}
+
+    <div class="table">
+        <style>
+            th,td{
+                border: 1px solid black;
+                text-align: center;
+                padding: 10px;
+            }
+            /* tr:nth-child(even){
+                background-color: teal;
+                color: white;
+            }
+
+            tr:nth-child(odd){
+                background-color: white;
+                color:teal;
+            } */
+
+            input{
+                padding: 10px;
+            }
+
+            .tot{
+                margin-left: 13cm;
+                width: 25%;
+                color: blanchedalmond;
+                background: black;
+                font-size: x-large;
+
+            }
+
+            .inp_block{
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+            }
+            
+        </style>
+    <table style="text-align: center;padding: 5px;border:2px solid black;width: 100%;">
+        <tr>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Date_created</th>
+        </tr>
+        {% for i in info %}
+        <tr>
+            <td>{{i.name}}</td>
+            <td>{{i.amount}}</td>
+            <td>{{i.date_created.date()}}</td>
+            <td><a href="/delete/{{i.id}}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div><br><br>
+
+    <div class="inp_block" style="text-align:center;background-color: turquoise;">
+        <form action="/" method="POST">
+        <input type="text" placeholder="Enter the Description" name="desc" id="desc"><br><br>
+        <input type="number" name="amount" id="amount" placeholder="Enter the Amount" value="0"><br><br>
+        <input type="submit" value="Add Expense"> 
+        </form>
+
+    </div><br><br>
+    <form action="/total" method="POST">
+    <input type="submit" class="tot" value="--> Get Total">
+    </form>
+    {% endblock %}
+
+</body>
+</html>
